@@ -74,9 +74,16 @@ export default function OrdersUi() {
 
       <div className="space-y-6">
         {orders.map((order) => {
-          const dateStr = new Date(order.createdAt).toLocaleDateString(
+          const dateStr = new Date(order.createdAt).toLocaleString(
             locale === "ar" ? "ar-EG" : "en-US",
-            { year: "numeric", month: "long", day: "numeric" }
+            {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            }
           );
 
           return (

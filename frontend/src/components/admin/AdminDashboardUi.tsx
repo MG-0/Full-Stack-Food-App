@@ -237,11 +237,25 @@ export default function AdminDashboardUi() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      {orders.map((ord) => (
-                        <tr key={ord._id} className="hover:bg-gray-50/50">
-                          <td className="px-6 py-4 font-medium text-gray-500 text-xs">
-                            {ord._id}
-                          </td>
+                      {orders.map((ord) => {
+                        const dateStr = new Date(ord.createdAt).toLocaleString(
+                          locale === "ar" ? "ar-EG" : "en-US",
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: true,
+                          }
+                        );
+
+                        return (
+                          <tr key={ord._id} className="hover:bg-gray-50/50">
+                            <td className="px-6 py-4 font-medium text-gray-500 text-xs">
+                              <div className="font-semibold text-gray-400">{ord._id}</div>
+                              <div className="text-[10px] text-orange-600 mt-1.5 font-bold whitespace-nowrap">📅 {dateStr}</div>
+                            </td>
                           <td className="px-6 py-4 font-bold text-gray-900">
                             <div>{ord.user?.name}</div>
                             <div className="text-xs font-normal text-gray-400">{ord.user?.email}</div>
@@ -290,7 +304,8 @@ export default function AdminDashboardUi() {
                             </select>
                           </td>
                         </tr>
-                      ))}
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

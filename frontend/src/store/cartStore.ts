@@ -22,12 +22,50 @@ const saveCart = (items: ICartItem[]) => {
 export const cart_actions = {
   loadUserCart: (userId: string | null) => {
     if (typeof window === "undefined") return;
-    const key = userId ? `cart_${userId}` : "cart_guest";
-    const data = localStorage.getItem(key);
-    useCartStore.setState({
-      items: data ? JSON.parse(data) : [],
-      userId,
-    });
+
+    if (userId) {
+      // User is logging in
+      const guestData = localStorage.getItem("cart_guest");
+      const userData = localStorage.getItem(`cart_${userId}`);
+      
+      let guestItems: ICartItem[] = guestData ? JSON.parse(guestData) : [];
+      let userItems: ICartItem[] = userData ? JSON.parse(userData) : [];
+
+      if (guestItems.length > 0) {
+        // Merge guest items into user items
+        const mergedItems = [...userItems];
+        guestItems.forEach((guestItem) => {
+          const existing = mergedItems.find((item) => item.product._id === guestItem.product._id);
+          if (existing) {
+            existing.quantity += guestItem.quantity;
+          } else {
+            mergedItems.push(guestItem);
+          }
+        });
+
+        // Save merged to user cart and clear guest cart
+        localStorage.setItem(`cart_${userId}`, JSON.stringify(mergedItems));
+        localStorage.removeItem("cart_guest");
+
+        useCartStore.setState({
+          items: mergedItems,
+          userId,
+        });
+      } else {
+        // No guest items, just load user cart
+        useCartStore.setState({
+          items: userItems,
+          userId,
+        });
+      }
+    } else {
+      // Guest loading or user logging out
+      const data = localStorage.getItem("cart_guest");
+      useCartStore.setState({
+        items: data ? JSON.parse(data) : [],
+        userId: null,
+      });
+    }
   },
 
   addItem: (product: IProduct, quantity: number = 1) => {

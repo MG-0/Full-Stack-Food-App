@@ -13,6 +13,10 @@ export default function HomeUi() {
     categories,
     products,
     selectedCategoryId,
+    searchQuery,
+    setSearchQuery,
+    sortBy,
+    setSortBy,
     loading,
     handleSelectCategory,
   } = useHome();
@@ -29,36 +33,65 @@ export default function HomeUi() {
         </p>
       </div>
 
-      {/* Category Filter Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        <div className="flex items-center space-x-3 rtl:space-x-reverse overflow-x-auto pb-3 scrollbar-none">
-          <button
-            onClick={() => handleSelectCategory("")}
-            className={`px-5 py-2.5 rounded-full font-bold text-sm cursor-pointer whitespace-nowrap transition-all duration-200 active:scale-95
-              ${selectedCategoryId === "" 
-                ? "bg-orange-600 text-white shadow-md scale-105" 
-                : "bg-white border border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600 hover:-translate-y-0.5"}`}
-          >
-            {locale === "ar" ? "الكل" : "All"}
-          </button>
+      {/* Filters, Search & Sort Bar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-gray-100 pb-5">
+          {/* Category Filter Bar */}
+          <div className="flex items-center space-x-3 rtl:space-x-reverse overflow-x-auto pb-2 scrollbar-none flex-1">
+            <button
+              onClick={() => handleSelectCategory("")}
+              className={`px-5 py-2.5 rounded-full font-bold text-sm cursor-pointer whitespace-nowrap transition-all duration-200 active:scale-95
+                ${selectedCategoryId === "" 
+                  ? "bg-orange-600 text-white shadow-md scale-105" 
+                  : "bg-white border border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600 hover:-translate-y-0.5"}`}
+            >
+              {locale === "ar" ? "الكل" : "All"}
+            </button>
 
-          {categories.map((category) => {
-            const name = locale === "ar" ? category.nameAr : category.nameEn;
-            const isActive = selectedCategoryId === category._id;
+            {categories.map((category) => {
+              const name = locale === "ar" ? category.nameAr : category.nameEn;
+              const isActive = selectedCategoryId === category._id;
 
-            return (
-              <button
-                key={category._id}
-                onClick={() => handleSelectCategory(category._id)}
-                className={`px-5 py-2.5 rounded-full font-bold text-sm cursor-pointer whitespace-nowrap transition-all duration-200 active:scale-95
-                  ${isActive 
-                    ? "bg-orange-600 text-white shadow-md scale-105" 
-                    : "bg-white border border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600 hover:-translate-y-0.5"}`}
-              >
-                {name}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={category._id}
+                  onClick={() => handleSelectCategory(category._id)}
+                  className={`px-5 py-2.5 rounded-full font-bold text-sm cursor-pointer whitespace-nowrap transition-all duration-200 active:scale-95
+                    ${isActive 
+                      ? "bg-orange-600 text-white shadow-md scale-105" 
+                      : "bg-white border border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600 hover:-translate-y-0.5"}`}
+                >
+                  {name}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Search and Sort controls */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            {/* Search Input */}
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t("search_placeholder")}
+                className="w-full sm:w-64 pl-10 pr-4 rtl:pr-10 rtl:pl-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition text-sm text-gray-900 placeholder-gray-400 bg-white"
+              />
+              <span className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-3 text-gray-400">🔍</span>
+            </div>
+
+            {/* Sort Dropdown */}
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition text-sm text-gray-800 font-semibold bg-white cursor-pointer"
+            >
+              <option value="default">{t("sort_default")}</option>
+              <option value="price_asc">{t("sort_price_asc")}</option>
+              <option value="price_desc">{t("sort_price_desc")}</option>
+            </select>
+          </div>
         </div>
 
         {/* Product Grid */}

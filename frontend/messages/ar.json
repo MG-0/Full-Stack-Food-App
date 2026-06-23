@@ -12,7 +12,11 @@
   "home": {
     "hero_title": "أكل لذيذ يوصلك بسرعة",
     "hero_subtitle": "اطلب وجباتك المفضلة من أفضل المطاعم",
-    "browse_products": "تصفح المنتجات"
+    "browse_products": "تصفح المنتجات",
+    "search_placeholder": "ابحث عن وجبة...",
+    "sort_default": "الترتيب الافتراضي",
+    "sort_price_asc": "السعر: من الأقل للأعلى",
+    "sort_price_desc": "السعر: من الأعلى للأقل"
   },
   "auth": {
     "login_title": "أهلاً بعودتك",

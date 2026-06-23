@@ -108,7 +108,11 @@ export const cart_actions = {
   },
 
   clearCart: () => {
+    if (typeof window !== "undefined") {
+      const { userId } = useCartStore.getState();
+      const key = userId ? `cart_${userId}` : "cart_guest";
+      localStorage.removeItem(key);
+    }
     useCartStore.setState({ items: [] });
-    saveCart([]);
   },
 };

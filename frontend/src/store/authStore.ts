@@ -87,6 +87,9 @@ export const auth_actions = {
     useAuthStore.setState({ loading: true });
     try {
       await auth_service.logout();
+    } catch (error) {
+      console.error("Backend logout failed, clearing local session anyway:", error);
+    } finally {
       useAuthStore.setState({
         user: null,
         isAuthenticated: false,
@@ -95,8 +98,6 @@ export const auth_actions = {
       });
       // Load guest cart (empty or guest items) on logout
       cart_actions.loadUserCart(null);
-    } catch (error) {
-      useAuthStore.setState({ loading: false });
     }
   },
 

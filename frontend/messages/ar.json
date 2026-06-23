@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "profile": "الملف الشخصي",
+    "orders": "طلباتي",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "admin": "لوحة التحكم"
+  },
+  "home": {
+    "hero_title": "أكل لذيذ يوصلك بسرعة",
+    "hero_subtitle": "اطلب وجباتك المفضلة من أفضل المطاعم",
+    "browse_products": "تصفح المنتجات"
+  },
+  "auth": {
+    "login_title": "أهلاً بعودتك",
+    "register_title": "إنشاء حساب جديد",
+    "name": "الاسم بالكامل",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "login_btn": "تسجيل الدخول",
+    "register_btn": "إنشاء الحساب",
+    "no_account": "ليس لديك حساب؟",
+    "have_account": "لديك حساب بالفعل؟",
+    "sign_up": "سجل الآن",
+    "sign_in": "سجل دخول"
+  },
+  "product": {
+    "add_to_cart": "أضف للسلة",
+    "price": "السعر",
+    "category": "الفئة",
+    "description": "الوصف",
+    "out_of_stock": "غير متوفر"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة",
+    "total": "الإجمالي",
+    "checkout": "إتمام الطلب",
+    "remove": "حذف",
+    "quantity": "الكمية"
+  },
+  "order": {
+    "title": "طلباتي",
+    "status_pending": "في الانتظار",
+    "status_preparing": "قيد التحضير",
+    "status_out_for_delivery": "في الطريق",
+    "status_delivered": "تم التسليم",
+    "payment_cod": "الدفع عند الاستلام",
+    "payment_online": "الدفع الإلكتروني",
+    "total": "الإجمالي",
+    "place_order": "تأكيد الطلب",
+    "address": "عنوان التوصيل",
+    "address_placeholder": "اكتب عنوانك بالتفصيل (الشارع، رقم المبنى، الشقة، إلخ...)",
+    "address_required": "يرجى كتابة عنوان التوصيل",
+    "phone": "رقم الهاتف",
+    "phone_placeholder": "اكتب رقم هاتفك المكون من 11 رقمًا",
+    "phone_required": "يرجى كتابة رقم الهاتف"
+  },
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "products": "المنتجات",
+    "categories": "الفئات",
+    "orders": "الطلبات",
+    "users": "المستخدمون",
+    "add_product": "إضافة منتج",
+    "add_category": "إضافة فئة",
+    "update_status": "تحديث الحالة",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "save": "حفظ"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما",
+    "not_found": "غير موجود",
+    "back": "العودة",
+    "search": "بحث"
+  }
+}

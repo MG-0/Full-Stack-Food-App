@@ -1,6 +1,44 @@
-# 🍔 Food Dash - Full-Stack Food Delivery App
+# 🍔 Food Dash - Premium Full-Stack Food Delivery App
 
-A premium, modern, and highly interactive Full-Stack Food Delivery Web Application. Built with **Next.js 15 (App Router)** for a super-fast, localized client interface, and **Express / MongoDB** for a robust, secure administrative backend.
+A premium, modern, and highly interactive Full-Stack Food Delivery Web Application. Built with **Next.js 16 (App Router)** for a blazing-fast, localized client interface, and **Express / MongoDB** for a robust, secure administrative backend.
+
+---
+
+## 📸 App Screenshots & User Experience
+
+### 🌐 Public & Shopping Experience
+| 🏠 Landing Page & Sorting | 🍕 Dynamic Category Filters |
+|:---:|:---:|
+| ![Landing Page](./screenshots/home_banner.png) | ![Product Catalog](./screenshots/home_items.png) |
+
+| 🔍 Price sorting dropdown | 🗣️ Full Arabic RTL Layout |
+|:---:|:---:|
+| ![Sorting options](./screenshots/home_sorting.png) | ![Arabic layout](./screenshots/home_arabic.png) |
+
+---
+
+### 🛒 Authentication & Cart Lifecycle
+| 🔐 Secure Registration | 🔑 Modern Login Screen |
+|:---:|:---:|
+| ![Register Screen](./screenshots/register.png) | ![Login Screen](./screenshots/login.png) |
+
+| 🛍️ Active Cart | 📭 Empty Cart State |
+|:---:|:---:|
+| ![Active Cart](./screenshots/cart_active.png) | ![Empty Cart](./screenshots/cart_empty.png) |
+
+---
+
+### 📦 Order Management & Admin Dashboard
+| 🚚 User Orders & Localized Time | ⚙️ Admin Dashboard Header |
+|:---:|:---:|
+| ![My Orders](./screenshots/my_orders.png) | ![Admin Dashboard Header](./screenshots/home_admin.png) |
+
+---
+
+### 👑 Administrative Operations (`/admin`)
+| 🍕 Products Management | 📁 Categories Management | 🛵 Orders Live Status Updates |
+|:---:|:---:|:---:|
+| ![Products panel](./screenshots/admin_products.png) | ![Categories panel](./screenshots/admin_categories.png) | ![Orders panel](./screenshots/admin_orders.png) |
 
 ---
 
@@ -8,10 +46,12 @@ A premium, modern, and highly interactive Full-Stack Food Delivery Web Applicati
 
 ### 👤 Customer Experience
 *   **🌐 Fully Bilingual (i18n)**: Seamless English & Arabic support with automatic LTR/RTL layout switching.
+*   **🔍 Product Search**: Live product search dynamically matching localized descriptions and titles.
+*   **⚡ Price Sorting**: Sort meals dynamically from lowest to highest or highest to lowest.
 *   **🛒 Persistent Cart**: State-managed shopping cart powered by **Zustand** with local storage scoping per user.
 *   **📍 Delivery Address & Phone Fields**: Structured fields during checkout to specify shipping and contact details.
 *   **💳 Dual Payment Options**: Cash on Delivery (COD) or Online Payment methods.
-*   **📦 Real-time Order Tracking**: Interactive user dashboard to view previous orders and track preparation/delivery stages.
+*   **📦 Real-time Order Tracking**: Interactive user dashboard to view previous orders with localized precise placement times.
 *   **⚡ Micro-Animations & Hover Effects**: Smooth component lifts, zoom transitions, and interactive scale compressions.
 
 ### 👑 Administrative Dashboard (`/admin`)
@@ -26,16 +66,15 @@ A premium, modern, and highly interactive Full-Stack Food Delivery Web Applicati
 ## 🛠️ Tech Stack
 
 ### Frontend
-[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Zustand](https://img.shields.io/badge/Zustand-443322?style=for-the-badge&logo=react&logoColor=white)](https://github.com/pmndrs/zustand)
+*   **Core**: React 19, Next.js 16 (App Router), TypeScript
+*   **State Management**: Zustand (with Persist middleware)
+*   **Styling**: Tailwind CSS 4
+*   **Localization**: next-intl (Bilingual English / Arabic)
 
 ### Backend & Database
-[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+*   **Core**: Node.js, Express, TypeScript
+*   **Database**: MongoDB (via Mongoose ODM)
+*   **Authentication**: JSON Web Tokens (JWT) with HTTP-only cookies
 
 ---
 
@@ -55,7 +94,7 @@ Food App/
 │   ├── package.json
 │   └── tsconfig.json
 │
-└── frontend/                 # Next.js 15 Client Web App
+└── frontend/                 # Next.js 16 Client Web App
     ├── messages/             # Localized i18n JSON translation files (en.json, ar.json)
     ├── src/
     │   ├── app/[locale]/     # Next.js App Router localized page components

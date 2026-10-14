@@ -4,9 +4,13 @@ export * from "./category.routes";
 export * from "./product.routes";
 export * from "./order.routes";
 
-export const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
-).replace(/\/$/, "");
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const withProtocol =
+  rawApiUrl.startsWith("http://") || rawApiUrl.startsWith("https://")
+    ? rawApiUrl
+    : `https://${rawApiUrl}`;
+
+export const API_BASE_URL = withProtocol.replace(/\/$/, "");
 
 export const ORDER_STATUS = {
   PENDING: "pending",

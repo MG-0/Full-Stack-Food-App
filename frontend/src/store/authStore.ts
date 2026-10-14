@@ -37,6 +37,9 @@ export const auth_actions = {
       }
       
       const user = response.data;
+      if (user?.token && typeof window !== "undefined") {
+        localStorage.setItem("food_user_token", user.token);
+      }
       useAuthStore.setState({
         loading: false,
         user: user || null,
@@ -66,6 +69,9 @@ export const auth_actions = {
       }
       
       const user = response.data;
+      if (user?.token && typeof window !== "undefined") {
+        localStorage.setItem("food_user_token", user.token);
+      }
       useAuthStore.setState({
         user: user || null,
         isAuthenticated: !!user,
@@ -90,6 +96,9 @@ export const auth_actions = {
     } catch (error) {
       console.error("Backend logout failed, clearing local session anyway:", error);
     } finally {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("food_user_token");
+      }
       useAuthStore.setState({
         user: null,
         isAuthenticated: false,
@@ -107,6 +116,9 @@ export const auth_actions = {
         const response = await auth_service.getProfile()
         const user = response.data;
         if (!user) {
+           if (typeof window !== "undefined") {
+             localStorage.removeItem("food_user_token");
+           }
            useAuthStore.setState({
              user: null,
              isAuthenticated: false,
@@ -120,6 +132,9 @@ export const auth_actions = {
          useAuthStore.setState({ loading: false, isAuthenticated: true, user, isInitialized: true });
          cart_actions.loadUserCart(user._id);
      } catch (error) {
+         if (typeof window !== "undefined") {
+           localStorage.removeItem("food_user_token");
+         }
          useAuthStore.setState({
            user: null,
            isAuthenticated: false,

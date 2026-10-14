@@ -6,11 +6,12 @@ import { generateToken } from "../utils/generateToken";
 import bcrypt from "bcryptjs";
 import { stringify } from "node:querystring";
 
-// Cooikes
+// Cookies
+const isProduction = process.env.NODE_ENV === "production";
 const cookiesOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict" as const,
+  secure: isProduction,
+  sameSite: (isProduction ? "none" : "lax") as "none" | "lax",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
@@ -136,7 +137,7 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
       success: true,
       message: "Logout is Successfully",
     };
-    res.status(201).json(response);
+    res.status(200).json(response);
   } catch (error) {
     const response: ApiResponse = {
       success: false,

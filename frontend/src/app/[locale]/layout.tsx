@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Cairo } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -7,11 +7,15 @@ import { routing } from "@/i18n/routing";
 import Navbar from "@/components/layout/Navbar";
 import "../globals.css";
 
-const geist = Geist({ subsets: ["latin"] });
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Food App",
-  description: "Order delicious food online",
+  title: "Food Dash - Delicious Food Delivered Fast",
+  description: "Order your favorite meals from the best restaurants with Food Dash",
 };
 
 interface LocaleLayoutProps {
@@ -33,9 +37,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={geist.className}
+      className={cairo.className}
     >
-      <body className="min-h-screen bg-gray-50 flex flex-col">
+      <body className="min-h-screen bg-slate-50 text-slate-900 flex flex-col antialiased selection:bg-orange-500 selection:text-white">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <div className="flex-grow">

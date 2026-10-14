@@ -55,99 +55,187 @@ export default function ProductDetailsUi({ id }: ProductDetailsUiProps) {
   const categoryName = locale === "ar" ? product.category?.nameAr : product.category?.nameEn;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 space-y-8">
-      {/* Back Button */}
-      <button
-        onClick={() => router.back()}
-        className="flex items-center space-x-2 rtl:space-x-reverse text-gray-500 hover:text-orange-600 transition font-semibold text-sm cursor-pointer group active:scale-95 duration-150"
-      >
-        <span className="text-lg group-hover:-translate-x-1 rtl:group-hover:translate-x-1 transition-transform">
-          {locale === "ar" ? "←" : "←"}
-        </span>
-        <span>{tCommon("back")}</span>
-      </button>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
+      {/* Back Button & Breadcrumbs */}
+      <div className="flex items-center justify-between">
+        <button
+          onClick={() => router.back()}
+          className="flex items-center gap-2 text-slate-500 hover:text-orange-600 transition-colors font-bold text-sm cursor-pointer group active:scale-95 duration-150 px-3 py-1.5 rounded-xl hover:bg-orange-50"
+        >
+          <span className="text-lg group-hover:-translate-x-1 rtl:group-hover:translate-x-1 transition-transform">
+            {locale === "ar" ? "→" : "←"}
+          </span>
+          <span>{locale === "ar" ? "العودة للقائمة الرئيسية" : "Back to menu"}</span>
+        </button>
 
-      {/* Main Card Grid */}
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-10">
-        {/* Left Column: Premium Zoom Image */}
-        <div className="relative aspect-square md:aspect-auto md:h-[500px] w-full rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 flex items-center justify-center group">
-          <img
-            src={product.image}
-            alt={name}
-            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-          />
+        {categoryName && (
+          <span className="text-xs font-bold text-slate-400">
+            {locale === "ar" ? "التصنيف" : "Category"}:{" "}
+            <span className="text-orange-600 font-extrabold">{categoryName}</span>
+          </span>
+        )}
+      </div>
+
+      {/* Main Luxury Product Showcase Card */}
+      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 p-6 sm:p-10">
+        {/* Left Column: Image with floating badges */}
+        <div className="space-y-4">
+          <div className="relative aspect-square w-full rounded-3xl overflow-hidden bg-slate-100 border border-slate-200/60 shadow-inner group">
+            <img
+              src={product.image}
+              alt={name}
+              className="h-full w-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-30" />
+
+            {/* Top Badges */}
+            <div className="absolute top-4 left-4 rtl:left-auto rtl:right-4 bg-orange-600/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-black text-white shadow-md flex items-center gap-1.5">
+              <span>🔥</span>
+              <span>{locale === "ar" ? "وجبة مميزة" : "Chef Special"}</span>
+            </div>
+
+            <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-black text-slate-800 shadow-md flex items-center gap-1">
+              <span className="text-amber-500 text-sm">★</span>
+              <span>4.9</span>
+              <span className="text-slate-400 text-[10px]">(180+)</span>
+            </div>
+          </div>
+
+          {/* Quick Stats Grid below Image */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-slate-50 border border-slate-200/70 p-3 rounded-2xl text-center">
+              <div className="text-xl">⏱️</div>
+              <div className="text-[11px] font-bold text-slate-800 mt-1">20-30 {locale === "ar" ? "دقيقة" : "mins"}</div>
+              <div className="text-[10px] text-slate-400">{locale === "ar" ? "وقت التحضير" : "Prep Time"}</div>
+            </div>
+            <div className="bg-slate-50 border border-slate-200/70 p-3 rounded-2xl text-center">
+              <div className="text-xl">🛵</div>
+              <div className="text-[11px] font-bold text-slate-800 mt-1">{locale === "ar" ? "توصيل ساخن" : "Fast Delivery"}</div>
+              <div className="text-[10px] text-slate-400">{locale === "ar" ? "تغليف حراري" : "Thermal Box"}</div>
+            </div>
+            <div className="bg-slate-50 border border-slate-200/70 p-3 rounded-2xl text-center">
+              <div className="text-xl">🌿</div>
+              <div className="text-[11px] font-bold text-slate-800 mt-1">{locale === "ar" ? "طازج 100%" : "Fresh Meat"}</div>
+              <div className="text-[10px] text-slate-400">{locale === "ar" ? "مكونات أصلية" : "Quality Pick"}</div>
+            </div>
+          </div>
         </div>
 
         {/* Right Column: Detailed Product Info */}
         <div className="flex flex-col justify-between space-y-6">
-          <div className="space-y-4">
+          <div className="space-y-5">
             {/* Category Tag */}
             {categoryName && (
-              <span className="inline-block px-3.5 py-1 text-xs font-bold text-orange-600 bg-orange-50 rounded-full">
-                {categoryName}
+              <span className="inline-flex items-center gap-1 px-3.5 py-1 text-xs font-extrabold text-orange-600 bg-orange-50 rounded-full border border-orange-200/50">
+                <span>🏷️</span>
+                <span>{categoryName}</span>
               </span>
             )}
 
             {/* Product Title */}
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
               {name}
             </h1>
 
-            {/* Price badge */}
-            <div className="text-2xl font-black text-orange-600">
-              {product.price} {locale === "ar" ? "ج.م" : "EGP"}
+            {/* Price section with Mockup Discount */}
+            <div className="flex items-baseline gap-3">
+              <span className="text-3xl sm:text-4xl font-black text-orange-600">
+                {product.price}{" "}
+                <span className="text-base font-bold text-slate-500">
+                  {locale === "ar" ? "ج.م" : "EGP"}
+                </span>
+              </span>
+              <span className="text-base font-bold text-slate-400 line-through">
+                {Math.round(product.price * 1.2)} {locale === "ar" ? "ج.م" : "EGP"}
+              </span>
+              <span className="px-2 py-0.5 bg-green-50 border border-green-200 text-green-700 text-xs font-black rounded-lg">
+                {locale === "ar" ? "خصم 20%" : "20% OFF"}
+              </span>
             </div>
 
-            {/* Divider */}
-            <hr className="border-gray-100" />
+            <hr className="border-slate-100" />
 
             {/* Description */}
             <div className="space-y-2">
-              <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
+              <h4 className="text-xs font-black text-slate-400 uppercase tracking-wider">
                 {t("description")}
               </h4>
-              <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed whitespace-pre-line font-medium">
                 {description}
               </p>
             </div>
+
+            {/* Highlights List */}
+            <div className="space-y-2 pt-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span className="text-green-500 text-sm">✓</span>
+                <span>{locale === "ar" ? "تحضير فوري فور استلام الطلب مباشرة" : "Cooked fresh right upon order"}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span className="text-green-500 text-sm">✓</span>
+                <span>{locale === "ar" ? "مكونات وتوابل طازجة عالية الجودة" : "High quality authentic ingredients"}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <span className="text-green-500 text-sm">✓</span>
+                <span>{locale === "ar" ? "تغليف محكم ومعقم للحفاظ على السخونة" : "Hygienic sealed packaging"}</span>
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-6 pt-4 border-t border-gray-50">
-            {/* Quantity Selector & Action bar */}
+          {/* Action Bar (Quantity + Animated Add to Cart) */}
+          <div className="space-y-4 pt-6 border-t border-slate-100">
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               {/* Quantity Picker */}
-              <div className="flex items-center justify-between border border-gray-200 rounded-xl p-1 bg-gray-50/50 w-full sm:w-36">
+              <div className="flex items-center justify-between border border-slate-200 rounded-2xl p-1 bg-slate-50 w-full sm:w-40 shadow-xs">
                 <button
                   onClick={handleDecrease}
-                  className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white text-gray-600 hover:text-orange-600 hover:shadow-sm font-bold transition cursor-pointer active:scale-90"
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white hover:bg-orange-50 text-slate-700 hover:text-orange-600 hover:shadow-xs font-black text-lg transition-all cursor-pointer active:scale-90"
+                  aria-label="Decrease quantity"
                 >
                   -
                 </button>
-                <span className="font-extrabold text-gray-900 text-base">{quantity}</span>
+                <span className="font-black text-slate-900 text-lg">{quantity}</span>
                 <button
                   onClick={handleIncrease}
-                  className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white text-gray-600 hover:text-orange-600 hover:shadow-sm font-bold transition cursor-pointer active:scale-90"
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white hover:bg-orange-50 text-slate-700 hover:text-orange-600 hover:shadow-xs font-black text-lg transition-all cursor-pointer active:scale-90"
+                  aria-label="Increase quantity"
                 >
                   +
                 </button>
               </div>
 
-              {/* Add to Cart Button */}
-              <Button
+              {/* Add to Cart Button with Live Price Total */}
+              <button
                 onClick={handleAddToCart}
-                variant="primary"
-                size="lg"
-                className="flex-1 active:scale-98 transition duration-200"
+                className={`flex-1 py-4 px-6 rounded-2xl font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-all duration-200 cursor-pointer active:scale-98
+                  ${
+                    isAdded
+                      ? "bg-emerald-600 text-white shadow-emerald-600/30"
+                      : "bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 hover:from-orange-700 hover:to-amber-600 text-white shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 hover:-translate-y-0.5"
+                  }`}
               >
                 {isAdded ? (
-                  <span className="flex items-center justify-center space-x-1.5 rtl:space-x-reverse font-bold text-white">
-                    <span>✓</span>
-                    <span>{locale === "ar" ? "تمت الإضافة!" : "Added!"}</span>
+                  <span className="flex items-center gap-2 animate-bounce">
+                    <span className="text-xl">✓</span>
+                    <span>{locale === "ar" ? "تمت الإضافة إلى السلة بنجاح!" : "Added to Cart!"}</span>
                   </span>
                 ) : (
-                  <span>{t("add_to_cart")}</span>
+                  <span className="flex items-center gap-2">
+                    <span className="text-xl">🛒</span>
+                    <span>
+                      {t("add_to_cart")} • {product.price * quantity}{" "}
+                      {locale === "ar" ? "ج.م" : "EGP"}
+                    </span>
+                  </span>
                 )}
-              </Button>
+              </button>
+            </div>
+
+            {/* Satisfaction Guarantee */}
+            <div className="flex items-center justify-center gap-4 text-[11px] font-bold text-slate-400 pt-2">
+              <span className="flex items-center gap-1">🛡️ {locale === "ar" ? "ضمان استرجاع أو استبدال" : "Quality Guarantee"}</span>
+              <span>•</span>
+              <span className="flex items-center gap-1">⚡ {locale === "ar" ? "دعم مباشر وسريع" : "Live Support"}</span>
             </div>
           </div>
         </div>

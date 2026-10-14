@@ -11,9 +11,16 @@ A premium, modern, and highly interactive Full-Stack Food Delivery Web Applicati
 |:---:|:---:|
 | ![Landing Page](./screenshots/home_banner.png) | ![Product Catalog](./screenshots/home_items.png) |
 
-| 🔍 Price sorting dropdown | 🗣️ Full Arabic RTL Layout |
+| 🔍 Price sorting dropdown | 🗣️ Full Arabic RTL Layout (Cairo Font) |
 |:---:|:---:|
 | ![Sorting options](./screenshots/home_sorting.png) | ![Arabic layout](./screenshots/home_arabic.png) |
+
+---
+
+### 🍽️ Cinematic Product Details Showcase
+| 🍔 Interactive Meal Showcase & Dynamic Total Stepper |
+|:---:|
+| ![Product Details](./screenshots/product_details.png) |
 
 ---
 
